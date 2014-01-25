@@ -1,0 +1,18 @@
+{
+  "name": "ng-alphabet-indexer",
+  "version": "0.1.0",
+  "main": [
+    "ng-alphabet-indexer.js",
+    "ng-alphabet-indexer.css"
+  ],
+  "ignore": [
+    "examples",
+    "src"
+  ],
+  "dependencies": {
+    "angular": "1.2.6"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.6"
+  }
+}
