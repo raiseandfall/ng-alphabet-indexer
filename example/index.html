@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/example.css">
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../build/ng-alphabet-indexer.js"></script>
+    <script src="app/app.js"></script>
+    <link rel="stylesheet" href="../build/ng-alphabet-indexer.css">
+  </head>
+  <body ng-app="main">
+    <header>
+      <h2>Contacts List</h2>
+    </header>
+
+    <ul class="container" ng-controller="DemoCtrl">
+      <li class="item" ng-repeat="item in items | orderBy:'firstName'">
+        <span>{{item.firstName}} {{item.lastName}}</span>
+      </li>
+    </ul>
+  </body>
+</html>
