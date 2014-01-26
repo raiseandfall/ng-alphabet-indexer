@@ -13,14 +13,14 @@ module.exports = function (grunt) {
 
     clean: {
       dist: {
-        src: ['ng-alphabet-indexer.*']
+        src: ['build/*.*']
       }
     },
 
     uglify: {
       js: {
-        src: ['ng-alphabet-indexer.js'],
-        dest: 'ng-alphabet-indexer.min.js',
+        src: ['build/ng-alphabet-indexer.js'],
+        dest: 'build/ng-alphabet-indexer.min.js',
         options: {
           banner: '<%= banner %>'
         }
@@ -34,14 +34,14 @@ module.exports = function (grunt) {
           'src/scripts/controller.js',
           'src/scripts/directive.js'
         ],
-        dest: 'ng-alphabet-indexer.js'
+        dest: 'build/ng-alphabet-indexer.js'
       }
     },
 
     sass: {
       build: {
         files: {
-          'ng-alphabet-indexer.css':'src/styles/ng-alphabet-indexer.scss'
+          'build/ng-alphabet-indexer.css':'src/styles/ng-alphabet-indexer.scss'
         },
         options : {
           style : 'expanded'
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
     cssmin: {
       css: {
         files: {
-          'ng-alphabet-indexer.min.css': 'ng-alphabet-indexer.css'
+          'build/ng-alphabet-indexer.min.css': 'build/ng-alphabet-indexer.css'
         },
         options: {
           banner: '<%= banner %>'
@@ -60,39 +60,48 @@ module.exports = function (grunt) {
       }
     },
 
-    // Add vendor prefixed styles
     autoprefixer: {
       options: {
         browsers: ['last 1 version']
       },
       dist: {
         files: [{
-          src: 'ng-alphabet-indexer.css',
-          dest: 'ng-alphabet-indexer.css'
+          src: 'build/ng-alphabet-indexer.css',
+          dest: 'build/ng-alphabet-indexer.css'
         }]
       }
     },
 
-    // Watches files for changes and runs tasks based on the changed files
     watch: {
+      scss: {
+        files: ['src/styles/*.scss'],
+        tasks: ['scss']
+      },
       js: {
         files: ['src/scripts/*.js'],
-        tasks: [],
-        options: {
-          livereload: true
-        }
+        tasks: ['build']
       },
       livereload: {
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: true
         },
         files: [
-          'src/{,*/}*.html'
+          'ng-alphabet-indexer.js',
+          'ng-alphabet-indexer.css'
         ]
       }
     },
 
-    // Make sure code styles are up to par and there are no obvious mistakes
+    connect: {
+      server: {
+        options: {
+          hostname: '*',
+          port: 8000,
+          base: './'
+        }
+      }
+    },
+
     jshint: {
       options: {
         jshintrc: '.jshintrc'
@@ -102,7 +111,6 @@ module.exports = function (grunt) {
       ]
     },
 
-    // Test settings
     karma: {
       unit: {
         configFile: 'karma.conf.js',
@@ -112,29 +120,13 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('test', [
-    'clean:dist',
-    'autoprefixer',
-    'karma'
-  ]);
+  grunt.registerTask('scss', ['sass', 'autoprefixer', 'cssmin']);
+  grunt.registerTask('js', ['jshint', 'concat']);
 
-  grunt.registerTask('dev', [
-    'clean:dist',
-    'sass',
-    'autoprefixer',
-    'cssmin',
-    'concat'
-  ]);
+  grunt.registerTask('dev', ['connect:server', 'watch']);
+  grunt.registerTask('test', ['clean:dist', 'autoprefixer', 'karma']);
 
-  grunt.registerTask('build', [
-    'dev',
-    'uglify'
-  ]);
-
-  grunt.registerTask('default', [
-    'test',
-    'build'
-  ]);
+  grunt.registerTask('build', ['clean:dist', 'scss', 'js', 'uglify']);
 
   grunt.loadNpmTasks('grunt-sass');
 };
