@@ -10,3 +10,7 @@
  * @name ngAlphabetIndexer.factory:ngAlphabetIndexerFactory
  * @description Factory manager for ngAlphabetIndexer
  */
+
+app.factory('', function() {
+
+});

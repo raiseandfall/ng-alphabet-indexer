@@ -12,3 +12,16 @@
  * @description
  * Each {@link ngAlphabetIndexer.directive:ngAlphabetIndexer ngAlphabetIndexer} directive creates an instance of `ngAlphabetIndexerController`
  */
+
+var ngAlphabetIndexerController = [
+	'$scope',
+	'$log',
+	function($scope, $log) {
+
+		'use strict';
+
+		$scope.addLetters = function(data) {
+			$scope.contacts = data.concat(['A', 'B', 'C', 'D']);
+		};
+	}
+];

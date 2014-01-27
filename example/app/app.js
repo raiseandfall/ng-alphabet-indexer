@@ -1,6 +1,9 @@
 var app = angular.module('main', ['ngAlphabetIndexer']);
 
 app.controller('DemoCtrl', function($scope) {
+
+  'use strict';
+
   var items = [
     {firstName: 'Jacques', lastName: 'Chirac'},
     {firstName: 'Alain', lastName: 'Madelin'},
@@ -94,5 +97,5 @@ app.controller('DemoCtrl', function($scope) {
     {firstName: 'Henri', lastName: 'Queuille'},
   ];
 
-  $scope.items = items;
+  $scope.contacts = items;
 });

@@ -20,8 +20,18 @@ ul {
   margin:0;
 }
 
-li.item {
+li {
   list-style-type: none;
+}
+
+li.item {
   background-image: linear-gradient(#FFF,#F1F1F1);
   padding:20px 15px;
+}
+
+li.divider {
+  background-color: #5E87B0;
+  color: #FFF;
+  text-shadow: 0 1px 1px #3E6790;
+  padding:5px 15px;
 }
