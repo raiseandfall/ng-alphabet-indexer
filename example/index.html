@@ -9,17 +9,12 @@
     <script src="app/app.js"></script>
     <link rel="stylesheet" href="../build/ng-alphabet-indexer.css">
   </head>
-  <body ng-app="main">
+  <body ng-app="main" ng-controller="DemoCtrl">
     <header>
       <h2>Contacts List</h2>
     </header>
 
     <ng-alphabet-indexer ng-contacts="contacts"></ng-alphabet-indexer>
 
-    <!--<ul class="container" ng-controller="DemoCtrl">
-      <li ng-repeat="item in items | orderBy:'firstName'" ng-disabled="item.isDivider" ng-class="{divider:item.isDivider,item:!item.isDivider}">
-        <span>{{item.firstName}} {{item.lastName}}</span>
-      </li>
-    </ul>-->
   </body>
 </html>

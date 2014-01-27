@@ -46,8 +46,12 @@ var ngAlphabetIndexerController = [
 
 		'use strict';
 
-		$scope.addLetters = function(data) {
-			$scope.contacts = data.concat(['A', 'B', 'C', 'D']);
+		var alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
+		$scope.addLetters = function() {
+			for (var i=0;i<alphabet.length;i++) {
+				$scope.ngContacts.push({firstName:alphabet[i], lastName:'', isDivider: true});
+			}
 		};
 	}
 ];
@@ -71,7 +75,6 @@ app.directive('ngAlphabetIndexer', [
 	'$log',
 	'$compile',
 	function($log, $compile) {
-
 		'use strict';
 
 		return {
@@ -80,13 +83,14 @@ app.directive('ngAlphabetIndexer', [
 				ngContacts: '='
 			},
 			controller: ngAlphabetIndexerController,
-			template: '<ul class="container" ng-controller="DemoCtrl">' +
-      '<li ng-repeat="item in contacts | orderBy:\'firstName\'" ng-disabled="item.isDivider" ng-class="{divider:item.isDivider,item:!item.isDivider}">' +
+			template: '<ul class="container">' +
+      '<li ng-repeat="item in ngContacts | orderBy:\'firstName\'" ng-disabled="item.isDivider" ng-class="{divider:item.isDivider,item:!item.isDivider}">' +
         '<span>{{item.firstName}} {{item.lastName}}</span>' +
       '</li></ul>',
-			link: function($scope, $attrs, $element, ctrl) {
+      link: function($scope, $attrs, $element, ctrl) {
 
-				//$scope.addLetters($attrs.ngContacts);
+				// Add static letters dividers
+				$scope.addLetters();
 
 			}
 		};

@@ -20,8 +20,12 @@ var ngAlphabetIndexerController = [
 
 		'use strict';
 
-		$scope.addLetters = function(data) {
-			$scope.contacts = data.concat(['A', 'B', 'C', 'D']);
+		var alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
+		$scope.addLetters = function() {
+			for (var i=0;i<alphabet.length;i++) {
+				$scope.ngContacts.push({firstName:alphabet[i], lastName:'', isDivider: true});
+			}
 		};
 	}
 ];
