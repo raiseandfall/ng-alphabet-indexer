@@ -27,5 +27,7 @@ var ngAlphabetIndexerController = [
 				$scope.ngContacts.push({firstName:alphabet[i], lastName:'', isDivider: true});
 			}
 		};
+
+		$scope.alphabet = alphabet;
 	}
 ];

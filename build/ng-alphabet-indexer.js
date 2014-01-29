@@ -53,6 +53,8 @@ var ngAlphabetIndexerController = [
 				$scope.ngContacts.push({firstName:alphabet[i], lastName:'', isDivider: true});
 			}
 		};
+
+		$scope.alphabet = alphabet;
 	}
 ];
 /**
@@ -83,10 +85,7 @@ app.directive('ngAlphabetIndexer', [
 				ngContacts: '='
 			},
 			controller: ngAlphabetIndexerController,
-			template: '<ul class="container">' +
-      '<li ng-repeat="item in ngContacts | orderBy:\'firstName\'" ng-disabled="item.isDivider" ng-class="{divider:item.isDivider,item:!item.isDivider}">' +
-        '<span>{{item.firstName}} {{item.lastName}}</span>' +
-      '</li></ul>',
+			templateUrl: '../src/partials/tpl.html',
       link: function($scope, $attrs, $element, ctrl) {
 
 				// Add static letters dividers
