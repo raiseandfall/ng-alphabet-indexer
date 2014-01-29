@@ -54,6 +54,10 @@ var ngAlphabetIndexerController = [
 			}
 		};
 
+		$scope.scrollToLetter = function(letter) {
+			console.log('go to ' + letter);
+		};
+
 		$scope.alphabet = alphabet;
 	}
 ];

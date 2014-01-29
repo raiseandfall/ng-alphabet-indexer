@@ -7,6 +7,6 @@
 </div>
 <div class="alphabet">
 	<ul>
-		<li ng-repeat="letter in alphabet">{{letter}}</li>
+		<li class="scrollLetter" ng-repeat="letter in alphabet" ng-mouseenter="scrollToLetter(letter)">{{letter | uppercase}}</li>
 	</ul>
 </div>

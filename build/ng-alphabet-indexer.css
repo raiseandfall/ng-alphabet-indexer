@@ -32,10 +32,11 @@ li.divider {
 }
 
 .alphabet ul {
-  margin: 10px;
+  /*margin:10px;*/
   height: 100%;
 }
 
 .alphabet ul li {
+  padding: 0 10px;
   text-align: center;
 }

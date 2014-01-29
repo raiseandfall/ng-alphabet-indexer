@@ -29,9 +29,10 @@ li.divider {
   top:50px;
   height:100%;
   ul {
-    margin:10px;
+    /*margin:10px;*/
     height:100%;
     li {
+      padding:0 10px;
       text-align: center;
     }
   }
