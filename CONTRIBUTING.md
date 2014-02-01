@@ -14,7 +14,7 @@ Contributing Guide
 ### Installation
 
 ````
-$ git clone https://github.com/PascalPrecht/angular-translate
+$ git clone https://github.com/raiseandfall/ng-alphabet-indexer.git
 ````
 
 ````
