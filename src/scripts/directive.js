@@ -23,10 +23,14 @@ app.directive('ngAlphabetIndexer', [
 		return {
 			restrict: 'E',
 			scope: {
-				ngContacts: '='
+				listItems: '=',
+				listOrderBy: '=',
+				hideUnusedLetters: '='
 			},
 			controller: ngAlphabetIndexerController,
-			templateUrl: '../src/partials/tpl.html',
+			template: '<ul class="lettersScrollBar">'+
+									'<li class="scrollLetter" ng-repeat="letter in alphabet" ng-mouseenter="scrollToLetter(letter)">{{letter | uppercase}}</li>'+
+								'</ul>',
       link: function($scope, $attrs, $element, ctrl) {
 
 				// Add static letters dividers

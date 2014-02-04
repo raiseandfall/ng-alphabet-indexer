@@ -24,19 +24,18 @@ li.divider {
   padding: 5px 15px;
 }
 
-.alphabet {
+ul.lettersScrollBar {
   position: fixed;
   right: 0;
   top: 50px;
-  height: 100%;
 }
 
-.alphabet ul {
-  /*margin:10px;*/
-  height: 100%;
-}
-
-.alphabet ul li {
+ul.lettersScrollBar li {
+  height: 20px;
   padding: 0 10px;
   text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

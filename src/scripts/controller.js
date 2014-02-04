@@ -16,20 +16,81 @@
 var ngAlphabetIndexerController = [
 	'$scope',
 	'$log',
-	function($scope, $log) {
+	'$compile',
+	'$element',
+	'$document',
+	function($scope, $log, $compile, $elmt, $document) {
 
 		'use strict';
 
 		var alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 
+		var list = $compile('<ul class="container">' +
+			'<li ng-repeat="item in listItems | orderBy:listOrderBy" ng-disabled="item.isDivider" ng-class="{divider:item.isDivider,people:!item.isDivider}" id="{{item.id}}" ng-click="action({id:item.id})">' +
+			'<span>{{item.firstName}} {{item.lastName}}</span>' +
+			'</li></ul>')($scope);
+		$elmt.append(list);
+
+		var x = 0, y = 0, i = 0, all, lettersScrollBar, offsetLeft, offsetTop, li, liHeight;
+
+		//
+		// @function	addLetters
+		//
 		$scope.addLetters = function() {
-			for (var i=0;i<alphabet.length;i++) {
-				$scope.ngContacts.push({firstName:alphabet[i], lastName:'', isDivider: true});
+			var firstLetters = [],
+					hideUnusedLetters = $scope.hideUnusedLetters || false,
+					i;
+			if (hideUnusedLetters) {
+				for (i = $scope.listItems.length - 1; i >= 0; i--) {
+					firstLetters.push($scope.listItems[i].firstName[0].toUpperCase());
+				}
+			}
+
+			for (i = alphabet.length - 1; i >= 0; i--) {
+				if(!hideUnusedLetters || (hideUnusedLetters && firstLetters.indexOf(alphabet[i]) !== -1)){
+					$scope.listItems.push({firstName:alphabet[i], lastName:'', isDivider: true, id:alphabet[i]});
+				}
+			}
+			if (alphabet.length) {
+				lettersScrollBar = $elmt.find('.lettersScrollBar');
+
+				// TODO : fix issue on height of list container
+				console.log('lettersScrollBar : ', lettersScrollBar.height());
+
+				if (lettersScrollBar.height() > 0) {
+					all = $elmt.find('.lettersScrollBar > li');
+					var padding = parseInt(($elmt.find('.container').height() - lettersScrollBar.height())/52, 10);
+					$elmt.find('.scrollLetter').css({'padding-top':padding+'px','padding-bottom':padding+'px'});
+					$scope.addTouchBar();
+				}
 			}
 		};
 
-		$scope.scrollToLetter = function(letter) {
-			console.log('go to ' + letter);
+		//
+		// @function	addTouchBar
+		//
+		$scope.addTouchBar = function() {
+			all.on('touchstart mousedown', function(event) {
+				all.removeClass('touched');
+				$(this).addClass('touched');
+				$scope.goto($(this).text());
+			});
+
+			offsetTop = lettersScrollBar.offset().top;
+			offsetLeft = lettersScrollBar.offset().left;
+			li = el.find('.letter');
+			liHeight = li.height() + parseInt(li.css('padding-top'), 10) * 2;
+
+			$element.on('mousedown touchstart', function(event) {
+
+			});
+		};
+
+		//
+		// @function	goto
+		//
+		$scope.goto = function(idx) {
+
 		};
 
 		$scope.alphabet = alphabet;
